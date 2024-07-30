@@ -14,11 +14,13 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - uses: ./app/gradle/gradle-build-action@v3
+      - uses: gradle/gradle-build-action@v3
         with:
+          arguments: build
+          build-root-directory: app
           gradle-version: 8.7
-      - run: ./app/gradlew checkstyleMain
-      - run: ./app/gradlew test
+      - run: ./gradlew checkstyleMain
+      - run: ./gradlew test
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
