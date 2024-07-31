@@ -8,3 +8,6 @@
 
 ### Test Coverage Badge
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5adee39f96ab91910ea2/test_coverage)](https://codeclimate.com/github/bsa2609/java-project-71/test_coverage)
+
+### Java CI
+[![Actions Status](https://github.com/bsa2609/java-project-71/actions/workflows/main.yml/badge.svg)](https://github.com/bsa2609/java-project-71/actions)
