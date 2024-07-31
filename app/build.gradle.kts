@@ -30,4 +30,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.jacocoTestReport { reports { xml.required.set(true) } }
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+}
