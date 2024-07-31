@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -36,6 +37,14 @@ public class AppTest {
         assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
     }
 
+    @Test
+    @DisplayName("'main' method works correctly when some file does not exist")
+    void testMainFileDoesNotExist() {
+        String[] args = {"./src/test/resources/file1.json", "./src/test/resources/file3.json"};
+        App.main(args);
+        String actual = output.toString(StandardCharsets.UTF_8).trim();
+        assertTrue(actual.contains("File") && actual.contains("does not exist"));
+    }
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
