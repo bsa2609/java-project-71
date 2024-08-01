@@ -40,5 +40,8 @@ make test
 
 ## Demo recordings
 
-### Comparing flat two '.json' or two '.yml' files 
+### Comparing flat files 
 [![Greet](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6.svg)](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6)
+
+### Comparing recursive files
+[![Greet](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ.svg)](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ)

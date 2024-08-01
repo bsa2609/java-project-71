@@ -8,7 +8,7 @@ import picocli.CommandLine.Parameters;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "checksum 4.0",
-    description = "Compares two configuration files and shows a difference.")
+        description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
     boolean usageHelpRequested;
@@ -22,16 +22,16 @@ public class App implements Callable<Integer> {
     @Parameters(index = "1", paramLabel = "filepath2", description = "path to second file")
     private String filepath2;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, paramLabel = "format", defaultValue = "stylish",
+            description = "output format [default: stylish]")
     private String format = "stylish";
 
     @Override
     public Integer call() throws Exception {
         try {
-            String diffResult = Differ.generate(filepath1, filepath2);
+            String diffResult = Differ.generate(filepath1, filepath2, format);
             System.out.println(diffResult);
         } catch (Exception e) {
-            String diffResult = "";
             System.out.println("File comparison error: " + e.getMessage());
         }
 
