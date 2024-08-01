@@ -41,13 +41,13 @@ make test
 ## Demo recordings
 
 ### The result of comparing flat files in the 'stylish' format 
-[![Greet](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6.svg)](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6)
+[![flat in stylish](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6.svg)](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6)
 
 ### The result of comparing recursive files in the 'stylish' format
-[![Greet](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ.svg)](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ)
+[![recursive in stylish](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ.svg)](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ)
 
 ### The result of comparing recursive files in the 'plain' format
-[![Greet](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh.svg)](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh)
+[![recursive in plain](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh.svg)](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh)
 
 ### The result of comparing recursive files in the 'json' format
-[![Greet](https://asciinema.org/a/Agku6VoOHWuIxksjyr2Y8zu8Y.svg)](https://asciinema.org/a/Agku6VoOHWuIxksjyr2Y8zu8Y)
+[![recursive in json](https://asciinema.org/a/Agku6VoOHWuIxksjyr2Y8zu8Y.svg)](https://asciinema.org/a/Agku6VoOHWuIxksjyr2Y8zu8Y)
