@@ -22,11 +22,38 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("'main' method for JSON works correctly")
-    void testMainJSON() throws Exception {
+    @DisplayName("'main' method for JSON works correctly with default format")
+    void testMainJSONWithDefault() throws Exception {
         String[] args = {"./src/test/resources/file1.json", "./src/test/resources/file2.json"};
         App.main(args);
-        String correctResult = FileUtils.readResourceFile("correct_result_json.txt");
+        String correctResult = FileUtils.readResourceFile("correct_result_stylish.txt");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for JSON works correctly with stylish format")
+    void testMainJSONWithStylish() throws Exception {
+        String[] args = {"-f=stylish", "./src/test/resources/file1.json", "./src/test/resources/file2.json"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_stylish.txt");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for JSON works correctly with plain format")
+    void testMainJSONWithPlain() throws Exception {
+        String[] args = {"-f=plain", "./src/test/resources/file1.json", "./src/test/resources/file2.json"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_plain.txt");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for JSON works correctly with JSON format")
+    void testMainJSONWithJson() throws Exception {
+        String[] args = {"-f=json", "./src/test/resources/file1.json", "./src/test/resources/file2.json"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_json.json");
         assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
     }
 
@@ -43,6 +70,60 @@ public class AppTest {
     @DisplayName("'main' method for JSON works correctly when second file does not exist")
     void testMainJSONSecondFileDoesNotExist() {
         String[] args = {"./src/test/resources/file1.json", "./src/test/resources/file3.json"};
+        App.main(args);
+        String actual = output.toString(StandardCharsets.UTF_8).trim();
+        assertTrue(actual.contains("File") && actual.contains("does not exist"));
+    }
+
+    @Test
+    @DisplayName("'main' method for YAML works correctly with default format")
+    void testMainYAMLWithDefault() throws Exception {
+        String[] args = {"./src/test/resources/file1.yml", "./src/test/resources/file2.yml"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_stylish.txt");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for YAML works correctly with stylish format")
+    void testMainYAMLWithStylish() throws Exception {
+        String[] args = {"-f=stylish", "./src/test/resources/file1.yml", "./src/test/resources/file2.yml"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_stylish.txt");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for YAML works correctly with plain format")
+    void testMainYAMLWithPlain() throws Exception {
+        String[] args = {"-f=plain", "./src/test/resources/file1.yml", "./src/test/resources/file2.yml"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_plain.txt");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for YAML works correctly with JSON format")
+    void testMainYAMLWithJson() throws Exception {
+        String[] args = {"-f=json", "./src/test/resources/file1.yml", "./src/test/resources/file2.yml"};
+        App.main(args);
+        String correctResult = FileUtils.readResourceFile("correct_result_json.json");
+        assertEquals(correctResult, output.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("'main' method for YAML works correctly when first file does not exist")
+    void testMainYAMLFirstFileDoesNotExist() {
+        String[] args = {"./src/test/resources/file3.yml", "./src/test/resources/file2.yml"};
+        App.main(args);
+        String actual = output.toString(StandardCharsets.UTF_8).trim();
+        assertTrue(actual.contains("File") && actual.contains("does not exist"));
+    }
+
+    @Test
+    @DisplayName("'main' method for YAML works correctly when second file does not exist")
+    void testMainYAMLSecondFileDoesNotExist() {
+        String[] args = {"./src/test/resources/file1.yml", "./src/test/resources/file3.yml"};
         App.main(args);
         String actual = output.toString(StandardCharsets.UTF_8).trim();
         assertTrue(actual.contains("File") && actual.contains("does not exist"));
