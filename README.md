@@ -6,7 +6,7 @@
 [![Actions Status](https://github.com/bsa2609/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/bsa2609/java-project-71/actions)
 
 ### Description:
-The difference calculator is a comparison program two '.json' or two '.yaml' files
+The difference calculator is a comparison program two '.json' or two '.yml' files
 
 ## Start
 
@@ -40,5 +40,5 @@ make test
 
 ## Demo recordings
 
-### Comparing flat two '.json' or two '.yaml' files 
+### Comparing flat two '.json' or two '.yml' files 
 [![Greet](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6.svg)](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6)
