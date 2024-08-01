@@ -1,37 +1,18 @@
 package hexlet.code;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class Differ {
-    public static Map<String, Object> parseJsonString(String content) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-
-        return mapper.readValue(content, new TypeReference<Map<String, Object>>() { });
-    }
-
-    public static String readFileToString(String filePath) throws Exception {
-        Path path = Paths.get(filePath).toAbsolutePath().normalize();
-
-        if (!Files.exists(path)) {
-            throw new Exception("File '" + path + "' does not exist");
-        }
-
-        return Files.readString(path).trim();
-    }
-
     public static String generate(String filePath1, String filePath2) throws Exception {
-        Map<String, Object> dataFile1 = parseJsonString(readFileToString(filePath1));
-        Map<String, Object> dataFile2 = parseJsonString(readFileToString(filePath2));
+        Map<String, Object> dataFile1 = Parser.parseString(FileUtils.readFile(filePath1),
+                FileUtils.determineExtensionFromFilePath(filePath1));
+
+        Map<String, Object> dataFile2 = Parser.parseString(FileUtils.readFile(filePath2),
+                FileUtils.determineExtensionFromFilePath(filePath2));
 
         return Stream.concat(dataFile1.keySet().stream(), dataFile2.keySet().stream()
                         .filter(Predicate.not(dataFile1::containsKey)))
