@@ -40,11 +40,14 @@ make test
 
 ## Demo recordings
 
-### Comparing flat files 
+### The result of comparing flat files in the 'stylish' format 
 [![Greet](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6.svg)](https://asciinema.org/a/sj3wnXJ4o9CfLr8ViG07jkpG6)
 
-### Comparing recursive files
+### The result of comparing recursive files in the 'stylish' format
 [![Greet](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ.svg)](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ)
 
-### Comparing recursive files in plain format
+### The result of comparing recursive files in the 'plain' format
 [![Greet](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh.svg)](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh)
+
+### The result of comparing recursive files in the 'json' format
+[![Greet](https://asciinema.org/a/Agku6VoOHWuIxksjyr2Y8zu8Y.svg)](https://asciinema.org/a/Agku6VoOHWuIxksjyr2Y8zu8Y)

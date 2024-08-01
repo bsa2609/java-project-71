@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import formatters.FormatterJson;
 import formatters.FormatterPlain;
 import formatters.FormatterStylish;
 
@@ -13,6 +14,8 @@ public class Formatter {
                 return FormatterStylish.format(dif);
             case "plain":
                 return FormatterPlain.format(dif);
+            case "json":
+                return FormatterJson.format(dif);
             default:
                 throw new Exception("The '" + formatName + "' format is not supported");
         }

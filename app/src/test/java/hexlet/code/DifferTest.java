@@ -9,16 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DifferTest {
     private static String correctResultJSON;
-    private static String correctResultJSONPlain;
-    private static String correctResultYAML;
-    private static String correctResultYAMLPlain;
+    private static String correctResultPlain;
+    private static String correctResultStylish;
 
     @BeforeAll
     public static void beforeAll() throws Exception {
-        correctResultJSON = FileUtils.readResourceFile("correct_result_json.txt");
-        correctResultJSONPlain = FileUtils.readResourceFile("correct_result_json_plain.txt");
-        correctResultYAML = FileUtils.readResourceFile("correct_result_yaml.txt");
-        correctResultYAMLPlain = FileUtils.readResourceFile("correct_result_yaml_plain.txt");
+        correctResultJSON = FileUtils.readResourceFile("correct_result_json.json");
+        correctResultPlain = FileUtils.readResourceFile("correct_result_plain.txt");
+        correctResultStylish = FileUtils.readResourceFile("correct_result_stylish.txt");
     }
 
     @Test
@@ -26,7 +24,7 @@ public class DifferTest {
     void testGenerateCorrectlyJSONWithStylish() throws Exception {
         String differResult = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json",
                 "stylish");
-        assertEquals(correctResultJSON, differResult);
+        assertEquals(correctResultStylish, differResult);
     }
 
     @Test
@@ -34,14 +32,22 @@ public class DifferTest {
     void testGenerateCorrectlyJSONWithPlain() throws Exception {
         String differResult = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json",
                 "plain");
-        assertEquals(correctResultJSONPlain, differResult);
+        assertEquals(correctResultPlain, differResult);
+    }
+
+    @Test
+    @DisplayName("'generate' method for JSON works correctly with JSON format")
+    void testGenerateCorrectlyJSONWithJSON() throws Exception {
+        String differResult = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json",
+                "json");
+        assertEquals(correctResultJSON, differResult);
     }
 
     @Test
     @DisplayName("'generate' method for JSON works correctly without format")
     void testGenerateCorrectlyJSON() throws Exception {
         String differResult = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json");
-        assertEquals(correctResultJSON, differResult);
+        assertEquals(correctResultStylish, differResult);
     }
     @Test
     @DisplayName("'generate' method for JSON throws an exception when reading the first file")
@@ -66,7 +72,7 @@ public class DifferTest {
     void testGenerateCorrectlyYAMLWithStylish() throws Exception {
         String differResult = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml",
                 "stylish");
-        assertEquals(correctResultYAML, differResult);
+        assertEquals(correctResultStylish, differResult);
     }
 
     @Test
@@ -74,14 +80,22 @@ public class DifferTest {
     void testGenerateCorrectlyYAMLWithPlain() throws Exception {
         String differResult = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml",
                 "plain");
-        assertEquals(correctResultYAMLPlain, differResult);
+        assertEquals(correctResultPlain, differResult);
+    }
+
+    @Test
+    @DisplayName("'generate' method for YAML works correctly with JSON format")
+    void testGenerateCorrectlyYAMLWithJSON() throws Exception {
+        String differResult = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml",
+                "json");
+        assertEquals(correctResultJSON, differResult);
     }
 
     @Test
     @DisplayName("'generate' method for YAML works correctly without format")
     void testGenerateCorrectlyYAML() throws Exception {
         String differResult = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml");
-        assertEquals(correctResultYAML, differResult);
+        assertEquals(correctResultStylish, differResult);
     }
 
     @Test
