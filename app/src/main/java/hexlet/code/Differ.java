@@ -3,14 +3,14 @@ package hexlet.code;
 import java.util.Map;
 
 public class Differ {
-    public static String generate(String filePath1, String filePath2, String format) throws Exception {
+    public static String generate(String filePath1, String filePath2, String formatName) throws Exception {
         Map<String, Object> dataFile1 = Parser.parseString(FileUtils.readFile(filePath1),
                 FileUtils.determineExtensionFromFilePath(filePath1));
 
         Map<String, Object> dataFile2 = Parser.parseString(FileUtils.readFile(filePath2),
                 FileUtils.determineExtensionFromFilePath(filePath2));
 
-        return Formatter.format(Comparator.compare(dataFile1, dataFile2), format);
+        return Formatter.format(Comparator.compare(dataFile1, dataFile2), formatName);
     }
 
     public static String generate(String filePath1, String filePath2) throws Exception {

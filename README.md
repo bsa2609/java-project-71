@@ -45,3 +45,6 @@ make test
 
 ### Comparing recursive files
 [![Greet](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ.svg)](https://asciinema.org/a/fJbLLuvZfJs0P4ZiSF67pXiMJ)
+
+### Comparing recursive files in plain format
+[![Greet](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh.svg)](https://asciinema.org/a/YOukqhkEiqtmc7hlY5kZDqzAh)

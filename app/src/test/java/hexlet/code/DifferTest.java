@@ -9,12 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DifferTest {
     private static String correctResultJSON;
+    private static String correctResultJSONPlain;
     private static String correctResultYAML;
+    private static String correctResultYAMLPlain;
 
     @BeforeAll
     public static void beforeAll() throws Exception {
         correctResultJSON = FileUtils.readResourceFile("correct_result_json.txt");
+        correctResultJSONPlain = FileUtils.readResourceFile("correct_result_json_plain.txt");
         correctResultYAML = FileUtils.readResourceFile("correct_result_yaml.txt");
+        correctResultYAMLPlain = FileUtils.readResourceFile("correct_result_yaml_plain.txt");
     }
 
     @Test
@@ -23,6 +27,14 @@ public class DifferTest {
         String differResult = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json",
                 "stylish");
         assertEquals(correctResultJSON, differResult);
+    }
+
+    @Test
+    @DisplayName("'generate' method for JSON works correctly with plain format")
+    void testGenerateCorrectlyJSONWithPlain() throws Exception {
+        String differResult = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json",
+                "plain");
+        assertEquals(correctResultJSONPlain, differResult);
     }
 
     @Test
@@ -55,6 +67,14 @@ public class DifferTest {
         String differResult = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml",
                 "stylish");
         assertEquals(correctResultYAML, differResult);
+    }
+
+    @Test
+    @DisplayName("'generate' method for YAML works correctly with plain format")
+    void testGenerateCorrectlyYAMLWithPlain() throws Exception {
+        String differResult = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml",
+                "plain");
+        assertEquals(correctResultYAMLPlain, differResult);
     }
 
     @Test
