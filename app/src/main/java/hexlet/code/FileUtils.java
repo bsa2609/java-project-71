@@ -18,7 +18,7 @@ public class FileUtils {
     }
 
     private static Path getResourcesPath(String fileName) {
-        return Paths.get("./src/test/resources/" + fileName).toAbsolutePath().normalize();
+        return Paths.get("src", "test", "resources", fileName).toAbsolutePath().normalize();
     }
 
     public static String readResourceFile(String fileName) throws Exception {

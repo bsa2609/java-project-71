@@ -10,17 +10,17 @@ public class FormatterStylish {
         return " ".repeat(count);
     }
 
-    public static String format(List<HashMap<String, Object>> dif) {
+    public static String format(List<HashMap<String, Object>> dif) throws RuntimeException {
         return dif.stream()
                 .flatMap(keyInfo -> {
                     String key = String.valueOf(keyInfo.get("key"));
-                    String status = String.valueOf(keyInfo.get("status"));
+                    String type = String.valueOf(keyInfo.get("type"));
                     String value1 = String.valueOf(keyInfo.get("value1"));
                     String value2 = String.valueOf(keyInfo.get("value2"));
 
                     ArrayList<String> differResult = new ArrayList<>();
 
-                    switch (status) {
+                    switch (type) {
                         case "add":
                             differResult.add(spaceIndentation(2) + "+ " + key + ": " + value2);
                             break;
@@ -31,8 +31,16 @@ public class FormatterStylish {
                             differResult.add(spaceIndentation(2) + "- " + key + ": " + value1);
                             differResult.add(spaceIndentation(2) + "+ " + key + ": " + value2);
                             break;
-                        default:
+                        case "notChange":
                             differResult.add(spaceIndentation(4) + key + ": " + value2);
+                            break;
+                        default:
+                            try {
+                                throw new Exception("The '" + type + "' type of change is not supported "
+                                        + "for stylish format");
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                     }
 
                     return differResult.stream();

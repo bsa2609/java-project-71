@@ -9,19 +9,13 @@ public class FormatterPlain {
     private static String getRepresentation(Object value) {
         String value1Representation;
 
-        if (value == null
-                || value.getClass().isPrimitive()
-                || value instanceof Boolean
-                || value instanceof Byte
-                || value instanceof Short
-                || value instanceof Integer
-                || value instanceof Long
-                || value instanceof Float
-                || value instanceof Double
-                || value instanceof Character) {
+        if (value == null) {
             value1Representation = String.valueOf(value);
         } else if (value instanceof String) {
             value1Representation = "'" + value + "'";
+        } else if (value.getClass().isPrimitive()
+                || value.getClass().getPackageName().equals("java.lang")) {
+            value1Representation = String.valueOf(value);
         } else {
             value1Representation = "[complex value]";
         }
@@ -29,12 +23,12 @@ public class FormatterPlain {
         return value1Representation;
     }
 
-    public static String format(List<HashMap<String, Object>> dif) {
+    public static String format(List<HashMap<String, Object>> dif) throws RuntimeException {
         return dif.stream()
-                .filter(keyInfo -> !keyInfo.get("status").toString().equals("notChange"))
+                .filter(keyInfo -> !keyInfo.get("type").toString().equals("notChange"))
                 .flatMap(keyInfo -> {
                     String key = String.valueOf(keyInfo.get("key"));
-                    String status = String.valueOf(keyInfo.get("status"));
+                    String type = String.valueOf(keyInfo.get("type"));
                     Object value1 = keyInfo.get("value1");
                     Object value2 = keyInfo.get("value2");
 
@@ -43,16 +37,24 @@ public class FormatterPlain {
 
                     ArrayList<String> differResult = new ArrayList<>();
 
-                    switch (status) {
+                    switch (type) {
                         case "add":
                             differResult.add("Property '" + key + "' was added with value: " + value2Representation);
                             break;
                         case "delete":
                             differResult.add("Property '" + key + "' was removed");
                             break;
-                        default:
+                        case "change":
                             differResult.add("Property '" + key + "' was updated. From "
-                                    + value1Representation + " to " + value2Representation);
+                                   + value1Representation + " to " + value2Representation);
+                            break;
+                        default:
+                            try {
+                                throw new Exception("The '" + type + "' type of change is not supported "
+                                        + "for plain format");
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                     }
 
                     return differResult.stream();
