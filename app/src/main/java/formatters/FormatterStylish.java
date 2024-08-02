@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FormatterStylish {
+    private static final int TWO_SPACES = 2;
+    private static final int FOR_SPACES = 4;
+
     private static String spaceIndentation(int count) {
         return " ".repeat(count);
     }
@@ -22,17 +25,17 @@ public class FormatterStylish {
 
                     switch (type) {
                         case "add":
-                            differResult.add(spaceIndentation(2) + "+ " + key + ": " + value2);
+                            differResult.add(spaceIndentation(TWO_SPACES) + "+ " + key + ": " + value2);
                             break;
                         case "delete":
-                            differResult.add(spaceIndentation(2) + "- " + key + ": " + value1);
+                            differResult.add(spaceIndentation(TWO_SPACES) + "- " + key + ": " + value1);
                             break;
                         case "change":
-                            differResult.add(spaceIndentation(2) + "- " + key + ": " + value1);
-                            differResult.add(spaceIndentation(2) + "+ " + key + ": " + value2);
+                            differResult.add(spaceIndentation(TWO_SPACES) + "- " + key + ": " + value1);
+                            differResult.add(spaceIndentation(TWO_SPACES) + "+ " + key + ": " + value2);
                             break;
                         case "notChange":
-                            differResult.add(spaceIndentation(4) + key + ": " + value2);
+                            differResult.add(spaceIndentation(FOR_SPACES) + key + ": " + value2);
                             break;
                         default:
                             try {

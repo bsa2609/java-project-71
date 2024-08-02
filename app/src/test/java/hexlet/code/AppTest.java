@@ -16,6 +16,9 @@ public class AppTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
+    /**
+     * Execute before all test.
+     */
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(output));
@@ -129,6 +132,9 @@ public class AppTest {
         assertTrue(actual.contains("File") && actual.contains("does not exist"));
     }
 
+    /**
+     * Execute after all test.
+     */
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);

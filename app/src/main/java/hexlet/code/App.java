@@ -11,10 +11,10 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    boolean usageHelpRequested;
+    private boolean usageHelpRequested;
 
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
-    boolean versionInfoRequested;
+    private boolean versionInfoRequested;
 
     @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filepath1;
@@ -26,6 +26,10 @@ public class App implements Callable<Integer> {
             description = "output format [default: stylish]")
     private String format;
 
+    /**
+     * Called from main().
+     * @return - exit code
+     */
     @Override
     public Integer call() throws Exception {
         try {
