@@ -20,30 +20,38 @@ public class FormatterPlain {
         return value1Representation;
     }
 
-    private static String buildFormatString(String key, String action, String value1, String value2) {
-        StringBuilder formatStringBuilder = new StringBuilder("\nProperty '");
+    private static StringBuilder newFormatStringBuilder(String key) {
+        StringBuilder formatStringBuilder = new StringBuilder("\n");
+        formatStringBuilder.append("Property '");
         formatStringBuilder.append(key);
         formatStringBuilder.append("' ");
-        formatStringBuilder.append(action);
 
-        if (value1 != null) {
-            formatStringBuilder.append(value1);
-        }
+        return formatStringBuilder;
+    }
 
-        if (value2 != null) {
-            formatStringBuilder.append(" to ");
-            formatStringBuilder.append(value2);
-        }
+    private static String buildFormatStringAdd(String key, Object value2) {
+        StringBuilder formatStringBuilder = newFormatStringBuilder(key);
+        formatStringBuilder.append("was added with value: ");
+        formatStringBuilder.append(getRepresentation(value2));
 
         return formatStringBuilder.toString();
     }
 
-    private static String buildFormatString(String key, String action) {
-        return buildFormatString(key, action, null, null);
+    private static String buildFormatStringDelete(String key) {
+        StringBuilder formatStringBuilder = newFormatStringBuilder(key);
+        formatStringBuilder.append("was removed");
+
+        return formatStringBuilder.toString();
     }
 
-    private static String buildFormatString(String key, String action, String value1) {
-        return buildFormatString(key, action, value1, null);
+    private static String buildFormatStringChange(String key, Object value1, Object value2) {
+        StringBuilder formatStringBuilder = newFormatStringBuilder(key);
+        formatStringBuilder.append("was updated. From ");
+        formatStringBuilder.append(getRepresentation(value1));
+        formatStringBuilder.append(" to ");
+        formatStringBuilder.append(getRepresentation(value2));
+
+        return formatStringBuilder.toString();
     }
 
     public static String format(List<HashMap<String, Object>> dif) throws RuntimeException {
@@ -59,15 +67,13 @@ public class FormatterPlain {
 
                     switch (type) {
                         case "add":
-                            formatBuilder.append(buildFormatString(key, "was added with value: ",
-                                    getRepresentation(value2)));
+                            formatBuilder.append(buildFormatStringAdd(key, value2));
                             break;
                         case "delete":
-                            formatBuilder.append(buildFormatString(key, "was removed"));
+                            formatBuilder.append(buildFormatStringDelete(key));
                             break;
                         case "change":
-                            formatBuilder.append(buildFormatString(key, "was updated. From ",
-                                    getRepresentation(value1), getRepresentation(value2)));
+                            formatBuilder.append(buildFormatStringChange(key, value1, value2));
                             break;
                         default:
                             try {
