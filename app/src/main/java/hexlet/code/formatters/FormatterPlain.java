@@ -54,6 +54,14 @@ public class FormatterPlain {
         return formatStringBuilder.toString();
     }
 
+    private static void generateExceptionTypeNotSupported(String type) throws RuntimeException {
+        try {
+            throw new Exception("The '" + type + "' type of change is not supported for plain format");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static String format(List<HashMap<String, Object>> dif) throws RuntimeException {
         StringBuilder formatBuilder = new StringBuilder();
 
@@ -76,12 +84,7 @@ public class FormatterPlain {
                             formatBuilder.append(buildFormatStringChange(key, value1, value2));
                             break;
                         default:
-                            try {
-                                throw new Exception("The '" + type + "' type of change is not supported "
-                                        + "for plain format");
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
+                            generateExceptionTypeNotSupported(type);
                     }
                 });
 
