@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class Comparator {
+    /*
     private static String determineTypeOfChange(boolean containsKey1, Object value1,
                                                 boolean containsKey2, Object value2) {
         String typeOfChange;
@@ -20,6 +21,45 @@ public class Comparator {
             typeOfChange = "notChange";
         } else {
             typeOfChange = "change";
+        }
+
+        return typeOfChange;
+    }
+     */
+
+    private static String determineTypeOfChangeAddOrDelete(boolean containsKey1, boolean containsKey2) {
+        String typeOfChange;
+
+        if (containsKey1) {
+            typeOfChange = "delete";
+        } else {
+            typeOfChange = "add";
+        }
+
+        return typeOfChange;
+    }
+
+    private static String determineTypeOfChangeChangeOrNotChange(Object value1, Object value2) {
+        String typeOfChange;
+
+        if (value1 == null && value2 == null
+                || value1 != null && value1.equals(value2)) {
+            typeOfChange = "notChange";
+        } else {
+            typeOfChange = "change";
+        }
+
+        return typeOfChange;
+    }
+
+    private static String determineTypeOfChange(boolean containsKey1, Object value1,
+                                                boolean containsKey2, Object value2) {
+        String typeOfChange;
+
+        if (containsKey1 && containsKey2) {
+            typeOfChange = determineTypeOfChangeChangeOrNotChange(value1, value2);
+        } else {
+            typeOfChange = determineTypeOfChangeAddOrDelete(containsKey1, containsKey2);
         }
 
         return typeOfChange;
