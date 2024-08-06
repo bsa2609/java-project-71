@@ -61,8 +61,6 @@ public class FormatterStylish {
             }
         });
 
-        formatBuilder.append("\n}");
-
-        return formatBuilder.toString();
+        return formatBuilder.append("\n}").toString();
     }
 }
