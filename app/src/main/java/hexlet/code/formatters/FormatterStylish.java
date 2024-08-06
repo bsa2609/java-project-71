@@ -7,14 +7,25 @@ public class FormatterStylish {
     private static final int TWO_SPACES = 2;
     private static final int FOR_SPACES = 4;
 
-    private static String spaceIndentation(int count) {
-        return " ".repeat(count);
+    private static String buildFormatString(int spaceCount, String operation, String key, String value) {
+        StringBuilder formatStringBuilder = new StringBuilder(" ".repeat(spaceCount));
+
+        if (!operation.isBlank()) {
+            formatStringBuilder.append(operation);
+            formatStringBuilder.append(" ");
+        }
+
+        formatStringBuilder.append(key);
+        formatStringBuilder.append(": ");
+        formatStringBuilder.append(value);
+
+        return formatStringBuilder.toString();
     }
 
-    public static String format(List<HashMap<String, Object>> dif) throws Exception {
+    public static String format(List<HashMap<String, Object>> dif) throws RuntimeException {
         StringBuilder formatBuilder = new StringBuilder("{");
 
-        for (HashMap<String, Object> keyInfo:dif) {
+        dif.forEach(keyInfo -> {
             String key = String.valueOf(keyInfo.get("key"));
             String type = String.valueOf(keyInfo.get("type"));
             String value1 = String.valueOf(keyInfo.get("value1"));
@@ -24,47 +35,27 @@ public class FormatterStylish {
 
             switch (type) {
                 case "add":
-                    formatBuilder.append(spaceIndentation(TWO_SPACES));
-                    formatBuilder.append("+ ");
-                    formatBuilder.append(key);
-                    formatBuilder.append(": ");
-                    formatBuilder.append(value2);
+                    formatBuilder.append(buildFormatString(TWO_SPACES, "+", key, value2));
                     break;
-
                 case "delete":
-                    formatBuilder.append(spaceIndentation(TWO_SPACES));
-                    formatBuilder.append("- ");
-                    formatBuilder.append(key);
-                    formatBuilder.append(": ");
-                    formatBuilder.append(value1);
+                    formatBuilder.append(buildFormatString(TWO_SPACES, "-", key, value1));
                     break;
-
                 case "change":
-                    formatBuilder.append(spaceIndentation(TWO_SPACES));
-                    formatBuilder.append("- ");
-                    formatBuilder.append(key);
-                    formatBuilder.append(": ");
-                    formatBuilder.append(value1);
+                    formatBuilder.append(buildFormatString(TWO_SPACES, "-", key, value1));
                     formatBuilder.append("\n");
-
-                    formatBuilder.append(spaceIndentation(TWO_SPACES));
-                    formatBuilder.append("+ ");
-                    formatBuilder.append(key);
-                    formatBuilder.append(": ");
-                    formatBuilder.append(value2);
+                    formatBuilder.append(buildFormatString(TWO_SPACES, "+", key, value2));
                     break;
-
                 case "notChange":
-                    formatBuilder.append(spaceIndentation(FOR_SPACES));
-                    formatBuilder.append(key);
-                    formatBuilder.append(": ");
-                    formatBuilder.append(value2);
+                    formatBuilder.append(buildFormatString(FOR_SPACES, "", key, value2));
                     break;
-
                 default:
-                    throw new Exception("The '" + type + "' type of change is not supported for stylish format");
+                    try {
+                        throw new Exception("The '" + type + "' type of change is not supported for stylish format");
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
             }
-        }
+        });
 
         formatBuilder.append("\n}");
 
