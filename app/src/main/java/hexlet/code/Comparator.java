@@ -11,8 +11,10 @@ public class Comparator {
                                                 boolean containsKey2, Object value2) {
         String typeOfChange;
 
-        if (!containsKey1 || !containsKey2) {
-            typeOfChange = containsKey2 ? "add" : "delete";
+        if (!containsKey1) {
+            typeOfChange = "add";
+        } else if (!containsKey2) {
+            typeOfChange = "delete";
         } else if (value1 == null && value2 == null) {
             typeOfChange = "notChange";
         } else if (value1 != null && value1.equals(value2)) {
