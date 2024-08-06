@@ -7,12 +7,14 @@ public class FormatterStylish {
     private static final int TWO_SPACES = 2;
     private static final int FOR_SPACES = 4;
 
-    private static String buildFormatString(int spaceCount, String operation, String key, String value) {
+    private static String buildFormatString(String action, String key, String value) {
         StringBuilder formatStringBuilder = new StringBuilder("\n");
-        formatStringBuilder.append(" ".repeat(spaceCount));
 
-        if (!operation.isBlank()) {
-            formatStringBuilder.append(operation);
+        if (action.isBlank()) {
+            formatStringBuilder.append(" ".repeat(FOR_SPACES));
+        } else {
+            formatStringBuilder.append(" ".repeat(TWO_SPACES));
+            formatStringBuilder.append(action);
             formatStringBuilder.append(" ");
         }
 
@@ -42,17 +44,17 @@ public class FormatterStylish {
 
             switch (type) {
                 case "add":
-                    formatBuilder.append(buildFormatString(TWO_SPACES, "+", key, value2));
+                    formatBuilder.append(buildFormatString("+", key, value2));
                     break;
                 case "delete":
-                    formatBuilder.append(buildFormatString(TWO_SPACES, "-", key, value1));
+                    formatBuilder.append(buildFormatString("-", key, value1));
                     break;
                 case "change":
-                    formatBuilder.append(buildFormatString(TWO_SPACES, "-", key, value1));
-                    formatBuilder.append(buildFormatString(TWO_SPACES, "+", key, value2));
+                    formatBuilder.append(buildFormatString("-", key, value1));
+                    formatBuilder.append(buildFormatString("+", key, value2));
                     break;
                 case "notChange":
-                    formatBuilder.append(buildFormatString(FOR_SPACES, "", key, value2));
+                    formatBuilder.append(buildFormatString("", key, value2));
                     break;
                 default:
                     generateExceptionTypeNotSupported(type);
