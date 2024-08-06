@@ -7,22 +7,19 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class Comparator {
-    private static String determineTypeOfChange(String key, boolean containsKey1, Object value1,
-                                                     boolean containsKey2, Object value2) {
+    private static String determineTypeOfChange(boolean containsKey1, Object value1,
+                                                boolean containsKey2, Object value2) {
         String typeOfChange;
 
         if (!containsKey1) {
             typeOfChange = "add";
         } else if (!containsKey2) {
             typeOfChange = "delete";
+        } else if (value1 == null && value2 == null
+                || value1 != null && value1.equals(value2)) {
+            typeOfChange = "notChange";
         } else {
-            if ((value1 == null && value2 != null)
-                    || (value1 != null && value2 == null)
-                    || !value1.equals(value2)) {
-                typeOfChange = "change";
-            } else {
-                typeOfChange = "notChange";
-            }
+            typeOfChange = "change";
         }
 
         return typeOfChange;
@@ -40,7 +37,8 @@ public class Comparator {
                     var value1 = dataFile1.getOrDefault(key, null);
                     var value2 = dataFile2.getOrDefault(key, null);
 
-                    String typeOfChange = determineTypeOfChange(key, dataFile1.containsKey(key), value1,
+                    String typeOfChange = determineTypeOfChange(
+                            dataFile1.containsKey(key), value1,
                             dataFile2.containsKey(key), value2);
 
                     HashMap<String, Object> keyInfo = new HashMap<>();

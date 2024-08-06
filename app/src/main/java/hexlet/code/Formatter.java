@@ -1,8 +1,8 @@
 package hexlet.code;
 
-import formatters.FormatterJson;
-import formatters.FormatterPlain;
-import formatters.FormatterStylish;
+import hexlet.code.formatters.FormatterJson;
+import hexlet.code.formatters.FormatterPlain;
+import hexlet.code.formatters.FormatterStylish;
 
 import java.util.HashMap;
 import java.util.List;

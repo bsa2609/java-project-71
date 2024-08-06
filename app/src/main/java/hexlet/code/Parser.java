@@ -18,6 +18,8 @@ public class Parser {
                 return parseStringUsingObjectMapper(content, new ObjectMapper());
             case ".yml":
                 return parseStringUsingObjectMapper(content, new YAMLMapper());
+            case ".yaml":
+                return parseStringUsingObjectMapper(content, new YAMLMapper());
             default:
                 throw new Exception("The '" + extension + "' file extension is not supported");
         }
