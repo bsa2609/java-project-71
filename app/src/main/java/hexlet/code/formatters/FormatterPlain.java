@@ -21,7 +21,7 @@ public class FormatterPlain {
     }
 
     private static String buildFormatString(String key, String action, String value1, String value2) {
-        StringBuilder formatStringBuilder = new StringBuilder("Property '");
+        StringBuilder formatStringBuilder = new StringBuilder("\nProperty '");
         formatStringBuilder.append(key);
         formatStringBuilder.append("' ");
         formatStringBuilder.append(action);
@@ -53,12 +53,9 @@ public class FormatterPlain {
                 .filter(keyInfo -> !keyInfo.get("type").toString().equals("notChange"))
                 .forEach(keyInfo -> {
                     String type = String.valueOf(keyInfo.get("type"));
-
                     String key = String.valueOf(keyInfo.get("key"));
                     Object value1 = keyInfo.get("value1");
                     Object value2 = keyInfo.get("value2");
-
-                    formatBuilder.append("\n");
 
                     switch (type) {
                         case "add":
@@ -82,10 +79,6 @@ public class FormatterPlain {
                     }
                 });
 
-        if (!formatBuilder.isEmpty()) {
-            formatBuilder.deleteCharAt(0);
-        }
-
-        return formatBuilder.toString();
+        return formatBuilder.toString().trim();
     }
 }

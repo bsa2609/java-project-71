@@ -15,11 +15,14 @@ public class Comparator {
             typeOfChange = "add";
         } else if (!containsKey2) {
             typeOfChange = "delete";
-        } else if (value1 == null && value2 == null
-                || value1 != null && value1.equals(value2)) {
-            typeOfChange = "notChange";
         } else {
-            typeOfChange = "change";
+            if (value1 == null && value2 == null) {
+                typeOfChange = "notChange";
+            } else if (value1 != null && value1.equals(value2)) {
+                typeOfChange = "notChange";
+            } else {
+                typeOfChange = "change";
+            }
         }
 
         return typeOfChange;

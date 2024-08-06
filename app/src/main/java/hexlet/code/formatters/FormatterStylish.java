@@ -8,7 +8,8 @@ public class FormatterStylish {
     private static final int FOR_SPACES = 4;
 
     private static String buildFormatString(int spaceCount, String operation, String key, String value) {
-        StringBuilder formatStringBuilder = new StringBuilder(" ".repeat(spaceCount));
+        StringBuilder formatStringBuilder = new StringBuilder("\n");
+        formatStringBuilder.append(" ".repeat(spaceCount));
 
         if (!operation.isBlank()) {
             formatStringBuilder.append(operation);
@@ -31,8 +32,6 @@ public class FormatterStylish {
             String value1 = String.valueOf(keyInfo.get("value1"));
             String value2 = String.valueOf(keyInfo.get("value2"));
 
-            formatBuilder.append("\n");
-
             switch (type) {
                 case "add":
                     formatBuilder.append(buildFormatString(TWO_SPACES, "+", key, value2));
@@ -42,7 +41,6 @@ public class FormatterStylish {
                     break;
                 case "change":
                     formatBuilder.append(buildFormatString(TWO_SPACES, "-", key, value1));
-                    formatBuilder.append("\n");
                     formatBuilder.append(buildFormatString(TWO_SPACES, "+", key, value2));
                     break;
                 case "notChange":
